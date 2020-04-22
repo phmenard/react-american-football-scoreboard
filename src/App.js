@@ -5,12 +5,18 @@ import "./App.css";
 import HomeButtons from "./HomeButtons";
 import AwayButtons from "./AwayButtons";
 import MyTimer from "./MyTimer";
+import CustomButtons from "./CustomButtons";
 
 function App() {
   //TODO: STEP 2 - Establish your applictaion's state with some useState hooks.  You'll need one for the home score and another for the away score.
   let [homeScore, setHomeScore] = useState(0);
   let [awayScore, setAwayScore] = useState(0);
-  
+  let [quarter, setQuarter] = useState(1);
+  let [down, setDown] = useState(1);
+
+
+  let myTimer = <MyTimer />;
+    
   return (
     <div className="container">
       <section className="scoreboard">
@@ -27,11 +33,13 @@ function App() {
             <div className="away__score">{awayScore}</div>
           </div>
         </div>
-        <BottomRow />
+        <BottomRow quarter={quarter} down={down}/>
       </section>
       <section className="buttons">
         <HomeButtons func={setHomeScore} score={homeScore}/>
+        <CustomButtons setQuarter={setQuarter} quarter={quarter} setDown={setDown} down={down} />
         <AwayButtons func={setAwayScore} score={awayScore}/>
+        
       </section>
     </div>
   );

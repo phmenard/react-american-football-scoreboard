@@ -7,6 +7,15 @@ let MyTimer = () => {
     const [minutesOnes, setMinutesOnes] = useState(4);
     const [minutesTens, setMinutesTens] = useState(1);
 
+
+    let reset = () =>{ 
+        setMinutesOnes(4);
+        setMinutesTens(1);
+        setSecondsOnes(9);
+        setSecondsTens(5);
+    }
+    
+
     const [isActive, setIsActive] = useState(true);
 
     useEffect(() => {
@@ -25,8 +34,8 @@ let MyTimer = () => {
                             setMinutesTens(minutesTens => minutesTens - 1);
                         }else{
                             setMinutesOnes(minutesOnes => minutesOnes - 1);
-                        }
-                        
+                        }  
+                         
                     } else {
                         setSecondsTens(setSecondsTens => setSecondsTens - 1);
                     }
@@ -35,7 +44,7 @@ let MyTimer = () => {
 
 
                 } else {
-                    setSecondsOnes(secondsOnes => secondsOnes - 1);
+                    setSecondsOnes(secondsOnes => secondsOnes - 1);   
                 }
 
             }, 1000);
