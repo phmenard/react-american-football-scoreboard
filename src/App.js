@@ -13,10 +13,12 @@ function App() {
   let [awayScore, setAwayScore] = useState(0);
   let [quarter, setQuarter] = useState(1);
   let [down, setDown] = useState(1);
+  let [toGo, setToGo] = useState(10);
+  let [ballOn, setBallOn] = useState(20);
 
 
   let myTimer = <MyTimer />;
-    
+
   return (
     <div className="container">
       <section className="scoreboard">
@@ -33,18 +35,23 @@ function App() {
             <div className="away__score">{awayScore}</div>
           </div>
         </div>
-        <BottomRow quarter={quarter} down={down}/>
+        <BottomRow quarter={quarter} down={down} toGo={toGo} ballOn={ballOn} />
+        <div>Hello</div>
       </section>
       <section className="buttons">
-        <HomeButtons func={setHomeScore} score={homeScore}/>
-        <CustomButtons setQuarter={setQuarter} quarter={quarter} setDown={setDown} down={down} />
-        <AwayButtons func={setAwayScore} score={awayScore}/>
-        
+        <HomeButtons func={setHomeScore} score={homeScore} />
+
+        <CustomButtons setQuarter={setQuarter} quarter={quarter}
+          setDown={setDown} down={down} setToGo={setToGo} toGo={toGo}
+          setBallOn={setBallOn} ballOn={ballOn}/>
+          
+        <AwayButtons func={setAwayScore} score={awayScore} />
+
       </section>
     </div>
   );
 
-  
+
 
 }
 

@@ -8,13 +8,13 @@ let MyTimer = () => {
     const [minutesTens, setMinutesTens] = useState(1);
 
 
-    let reset = () =>{ 
+    let reset = () => {
         setMinutesOnes(4);
         setMinutesTens(1);
         setSecondsOnes(9);
         setSecondsTens(5);
     }
-    
+
 
     const [isActive, setIsActive] = useState(true);
 
@@ -23,31 +23,34 @@ let MyTimer = () => {
         if (isActive) {
             interval = setInterval(() => {
                 if (secondsOnes == 0) {
-                    setSecondsOnes(9);
-
-                    if (secondsTens == 0) {
-                        setSecondsTens(5);
-
-
-                        if(minutesOnes == 0){
-                            setMinutesOnes(9);
-                            setMinutesTens(minutesTens => minutesTens - 1);
-                        }else{
-                            setMinutesOnes(minutesOnes => minutesOnes - 1);
-                        }  
-                         
+                    if (secondsTens == 0 && minutesOnes == 0 && minutesTens == 0) {
+                        setIsActive(false);
                     } else {
-                        setSecondsTens(setSecondsTens => setSecondsTens - 1);
+                        setSecondsOnes(9);
+
+                        if (secondsTens == 0) {
+                            setSecondsTens(5);
+
+
+                            if (minutesOnes == 0) {
+                                setMinutesOnes(9);
+
+                                setMinutesTens(minutesTens => minutesTens - 1);
+                            } else {
+                                setMinutesOnes(minutesOnes => minutesOnes - 1);
+                            }
+
+                        } else {
+                            setSecondsTens(setSecondsTens => setSecondsTens - 1);
+                        }
                     }
 
-
-
-
                 } else {
-                    setSecondsOnes(secondsOnes => secondsOnes - 1);   
+                    setSecondsOnes(secondsOnes => secondsOnes - 1);
                 }
 
-            }, 1000);
+
+            }, 10);
         } else if (!isActive && secondsOnes !== 0) {
             clearInterval(interval);
         }
