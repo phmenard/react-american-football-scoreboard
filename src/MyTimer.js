@@ -1,7 +1,7 @@
 //TODO: STEP 1 - Import the useState hook.
 import React, { useState, useEffect } from "react";
 
-let MyTimer = () => {
+let MyTimer = (props) => {
     const [secondsOnes, setSecondsOnes] = useState(9);
     const [secondsTens, setSecondsTens] = useState(5);
     const [minutesOnes, setMinutesOnes] = useState(4);
@@ -24,7 +24,14 @@ let MyTimer = () => {
             interval = setInterval(() => {
                 if (secondsOnes == 0) {
                     if (secondsTens == 0 && minutesOnes == 0 && minutesTens == 0) {
-                        setIsActive(false);
+                        if (props.quarter == 4) {
+                            setIsActive(false);
+                        } else {
+                            props.setQuarter(props.quarter + 1);
+                            reset();
+                        }
+
+
                     } else {
                         setSecondsOnes(9);
 
@@ -50,7 +57,7 @@ let MyTimer = () => {
                 }
 
 
-            }, 10);
+            }, 1000);
         } else if (!isActive && secondsOnes !== 0) {
             clearInterval(interval);
         }
@@ -61,5 +68,7 @@ let MyTimer = () => {
         <div className="timer">{minutesTens}{minutesOnes}:{secondsTens}{secondsOnes}</div>
     );
 }
+
+
 
 export default MyTimer;

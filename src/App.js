@@ -15,7 +15,7 @@ function App() {
   let [down, setDown] = useState(1);
   let [toGo, setToGo] = useState(10);
   let [ballOn, setBallOn] = useState(20);
-
+  let [possession, setPossession] = useState('home');
 
   let myTimer = <MyTimer />;
 
@@ -24,14 +24,14 @@ function App() {
       <section className="scoreboard">
         <div className="topRow">
           <div className="home">
-            <h2 className="home__name">Lions</h2>
+            <h2 className="home__name">Patriots</h2>
 
             {/* TODO STEP 3 - We need to change the hardcoded values in these divs to accept dynamic values from our state. */}
             <div className="home__score">{homeScore}</div>
           </div>
-          <MyTimer />
+          <MyTimer setQuarter={setQuarter} quarter={quarter}/>
           <div className="away">
-            <h2 className="away__name">Tigers</h2>
+            <h2 className="away__name">Giants</h2>
             <div className="away__score">{awayScore}</div>
           </div>
         </div>
@@ -43,7 +43,9 @@ function App() {
 
         <CustomButtons setQuarter={setQuarter} quarter={quarter}
           setDown={setDown} down={down} setToGo={setToGo} toGo={toGo}
-          setBallOn={setBallOn} ballOn={ballOn}/>
+          setBallOn={setBallOn} ballOn={ballOn} setPossession={setPossession}
+          possession={possession} setHomeScore={setHomeScore} homeScore={homeScore}
+          setAwayScore={setAwayScore} awayScore={awayScore}/>
           
         <AwayButtons func={setAwayScore} score={awayScore} />
 
