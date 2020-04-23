@@ -35,7 +35,7 @@ function App() {
             <div className="away__score">{awayScore}</div>
           </div>
         </div>
-        <BottomRow quarter={quarter} down={down} toGo={toGo} ballOn={ballOn} />
+        <BottomRow quarter={quarter} down={down} toGo={toGo} ballOn={ballOn} possession={possession}/>
         <div>Hello</div>
       </section>
       <section className="buttons">

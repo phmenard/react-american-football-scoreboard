@@ -3,7 +3,9 @@ import React, { useState } from "react";
 
 let CustomButtons = (props) => {
 
-    let plays = ['Passing', 'Running', 'Trick', 'Flee Flicker', 'Hail Mary', 'Latteral'];
+    let plays = ['Passing', 'Running', 'Trick', 'Flee Flicker', 'Hail Mary', 'Latteral', 'Counter', 'Draw', 'Pitch'];
+
+    let extraPoint = [0,1];
 
     const hideButton = {
         visibility: 'hidden'
@@ -13,7 +15,7 @@ let CustomButtons = (props) => {
         visibility: 'block'
     };
 
-    let [kickButton, setKickButton] = useState(showButton);
+    let [kickButton, setKickButton] = useState(hideButton);
     let [midField, setMidField] = useState(false);
 
     return (
@@ -62,14 +64,13 @@ let CustomButtons = (props) => {
                 // whats left in the play for yards to gain?
                 let yardsToGo = props.toGo - yardsGained;
                 if (yardsToGo <= 0) {
+                    // We got a first dwon
                     yardsToGo = 10;
                     props.setDown(1);
                 } else {
                     props.setDown(props.down + 1);
                 }
                 props.setToGo(yardsToGo);
-
-
 
                 console.log(midField);
 
@@ -89,18 +90,16 @@ let CustomButtons = (props) => {
                     props.setBallOn(ballPosition);
                 }
 
-
-
-
                 if (ballPosition <= 0) {
                     if (props.possession == 'home') {
-                        props.setHomeScore(props.homeScore + 7);
+                        props.setHomeScore(props.homeScore + (6 + extraPoint[Math.floor(Math.random() * extraPoint.length)]));
                         props.setPossession('away');
                     } else {
-                        props.setAwayScore(props.awayScore + 7);
+                        props.setAwayScore(props.awayScore + 6);
                         props.setPossession('home');
                     }
-
+                    props.setDown(1);
+                    setMidField(false);
                     props.setBallOn(Math.floor(Math.random() * 50) + 1);
                 }
 
