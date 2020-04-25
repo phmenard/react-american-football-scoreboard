@@ -5,14 +5,14 @@ let CustomButtons = (props) => {
 
     let plays = ['Passing', 'Running', 'Trick', 'Flee Flicker', 'Hail Mary', 'Latteral', 'Counter', 'Draw', 'Pitch'];
 
-    let extraPoint = [0,1];
+    let extraPoint = [0, 1, 0,0, 1, 1, 0, 1];
 
     const hideButton = {
-        visibility: 'hidden'
+        display: 'none'
     };
 
     const showButton = {
-        visibility: 'block'
+        display: 'inline'
     };
 
     let [kickButton, setKickButton] = useState(hideButton);
@@ -31,8 +31,7 @@ let CustomButtons = (props) => {
                     props.setQuarter(props.quarter + 1);
                 }
 
-                //props.resetTimer();
-
+                
             }
 
             }>Change Quarter</button>
@@ -43,10 +42,6 @@ let CustomButtons = (props) => {
                 } else {
                     props.setDown(props.down + 1);
                 }
-                
-                setKickButton(showButton);
-                console.log(kickButton);
-                //props.resetTimer();
 
             }
 
@@ -54,8 +49,7 @@ let CustomButtons = (props) => {
 
 
             <button className="homeButtons__fieldGoal" onClick={() => {
-                //if (props.down == 4) {
-                //props.setDown(1);
+                
 
                 // grab a random # from -30-10
                 let yardsGained = Math.floor(Math.random() * 41) - 10;
@@ -69,6 +63,11 @@ let CustomButtons = (props) => {
                     props.setDown(1);
                 } else {
                     props.setDown(props.down + 1);
+                    console.log(props.down);
+                    if (props.down == 3) {
+                        
+                        setKickButton(showButton);
+                    }
                 }
                 props.setToGo(yardsToGo);
 
@@ -91,12 +90,12 @@ let CustomButtons = (props) => {
                 }
 
                 if (ballPosition <= 0) {
-                    if (props.possession == 'home') {
+                    if (props.possession == 'away') {
                         props.setHomeScore(props.homeScore + (6 + extraPoint[Math.floor(Math.random() * extraPoint.length)]));
-                        props.setPossession('away');
+                        props.setPossession('home');
                     } else {
                         props.setAwayScore(props.awayScore + 6);
-                        props.setPossession('home');
+                        props.setPossession('away');
                     }
                     props.setDown(1);
                     setMidField(false);
@@ -105,22 +104,25 @@ let CustomButtons = (props) => {
 
 
                 console.log(`You completed a ${plays[Math.floor(Math.random() * plays.length)]} play for ${yardsGained} yards.`);
-                //} else {
-                //    props.setDown(props.down + 1);
-                // }
-
-                //props.resetTimer();
-
+                
             }
 
             }>Play a Down</button>
 
             <button style={kickButton} className="homeButtons__fieldGoal" onClick={() => {
-
-
+                setKickButton(hideButton);
+                props.setToGo(10);
+                props.setDown(1);
+                setMidField(false);
+                props.setBallOn(Math.floor(Math.random() * 50) + 1);
+                if (props.possession == 'away') {
+                    props.setPossession('away');
+                } else {
+                    props.setPossession('home');
+                }
             }
 
-            }>Kick</button>
+            }>Punt</button>
 
         </div>
     );

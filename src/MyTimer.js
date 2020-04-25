@@ -57,7 +57,7 @@ let MyTimer = (props) => {
                 }
 
 
-            }, 100);
+            }, 500);
         } else if (!isActive && secondsOnes !== 0) {
             clearInterval(interval);
         }
